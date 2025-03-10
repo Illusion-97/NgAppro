@@ -1,5 +1,4 @@
 import {Component, inject} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {map, Observable} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
