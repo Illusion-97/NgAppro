@@ -1,7 +1,8 @@
 import {Component, inject} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {map, Observable} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +13,7 @@ import {AsyncPipe} from '@angular/common';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  products: Observable<Produit[]>  = inject(HttpClient).get<Produit[]>("http://localhost:3000/products")
+  products: Observable<Produit[]>  = inject(ActivatedRoute).data.pipe(map(({produits}) => produits))
 }
 
 interface Produit {
