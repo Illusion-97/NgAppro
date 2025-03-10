@@ -203,6 +203,27 @@
       "price": 2.49,
       "rating": 4.37,
       "src": "https://cdn.dummyjson.com/products/images/groceries/Kiwi/1.png"
+    },
+    {
+      "id": 31,
+      "name": "Mon nouveau Produit",
+      "src": "https://toutetnimportequoi",
+      "rating": 3,
+      "price": 45
+    },
+    {
+      "id": 32,
+      "name": "Mon nouveau Produit",
+      "src": "https://toutetnimportequoi",
+      "rating": 3,
+      "price": 45
+    },
+    {
+      "id": 33,
+      "name": "Mon nouveau Produit",
+      "src": "https://toutetnimportequoi",
+      "rating": 3,
+      "price": 45
     }
   ]
 }

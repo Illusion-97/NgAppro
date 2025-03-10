@@ -10,5 +10,10 @@ export const routes: Routes = [
     resolve: {
       produits: ()=> inject(HttpClient).get("/products")
     }
+  },
+  {
+    path: ":id",
+    loadComponent: () => import("./views/editor/editor.component")
+      .then(m => m.EditorComponent)
   }
 ]

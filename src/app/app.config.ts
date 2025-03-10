@@ -4,7 +4,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import {HttpInterceptorFn, provideHttpClient, withInterceptors} from '@angular/common/http';
 import {environment} from '../environments/environment';
-import {finalize} from 'rxjs';
+import {catchError, finalize, throwError} from 'rxjs';
 
 const backEndInterceptor : HttpInterceptorFn = (req, next) => {
   if(req.url.startsWith("/")) {
@@ -12,7 +12,10 @@ const backEndInterceptor : HttpInterceptorFn = (req, next) => {
       url: environment.API_URL + req.url
     })
   }
-  return next(req)
+  return next(req).pipe(catchError(err => {
+    console.log("gestion globale")
+    return throwError(() => err)
+  }))
 }
 
 export const appConfig: ApplicationConfig = {
