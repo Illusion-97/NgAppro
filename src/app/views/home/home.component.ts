@@ -15,7 +15,7 @@ export class HomeComponent {
   products: Observable<Produit[]>  = inject(ActivatedRoute).data.pipe(map(({produits}) => produits))
 }
 
-interface Produit {
+export interface Produit {
   id: number
   name: string
   src: string
