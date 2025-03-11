@@ -17,6 +17,11 @@ export const routes: Routes = [
       .then(m => m.routes)
   },
   {
+    path: "auth",
+    loadChildren: () => import("../auth/auth.routes")
+      .then(m => m.routes)
+  },
+  {
     path: "**",
     loadComponent: () => import("./views/not-found/not-found.component")
       .then(m => m.NotFoundComponent)
