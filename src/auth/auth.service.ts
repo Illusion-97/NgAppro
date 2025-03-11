@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, map, tap} from 'rxjs';
+import {CanMatchFn, Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -27,17 +28,22 @@ export class AuthService {
 
   private readonly AUTH_KEY = "AUTH_RESPONSE"
 
+  useLocal: boolean = false
+
+  hasChanges :boolean = false
+
   constructor(private readonly http: HttpClient) {
-    const sessionResponse = sessionStorage.getItem(this.AUTH_KEY)
+    const sessionResponse = sessionStorage.getItem(this.AUTH_KEY) ?? localStorage.getItem(this.AUTH_KEY)
     if(sessionResponse)
       this.authResponse.next(JSON.parse(sessionResponse))
 
 
     this.authResponse.subscribe(response => {
       if(response) {
-        sessionStorage.setItem(this.AUTH_KEY, JSON.stringify(response))
+        (this.useLocal ? localStorage : sessionStorage).setItem(this.AUTH_KEY, JSON.stringify(response))
       } else {
         sessionStorage.clear()
+        localStorage.clear()
       }
     })
   }
@@ -57,6 +63,10 @@ export class AuthService {
     return this.http.post<AuthResponse>("/register", data)
   }
 }
+
+export const authGuard: CanMatchFn = (route, segments) => {
+  return inject(AuthService).isLogged /*|| inject(Router).parseUrl('/auth/login');*/
+};
 
 export interface LoginData {
   email: string

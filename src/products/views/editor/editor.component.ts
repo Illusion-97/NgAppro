@@ -3,9 +3,10 @@ import {FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators} from
 import {JsonPipe} from '@angular/common';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, ActivatedRouteSnapshot, RedirectCommand, ResolveFn, Router} from '@angular/router';
-import {catchError, map, of, race, timeout} from 'rxjs';
+import {catchError, finalize, map, of, race, timeout} from 'rxjs';
 import {AbstractFormGroupComponent} from '../../../common/tools/abstract-form-group-component';
 import {Produit} from '../../../app/views/home/home.component';
+import {AuthService} from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-editor',
@@ -37,12 +38,16 @@ export class EditorComponent extends AbstractFormGroupComponent {
   private router = inject(Router)
   //private route = inject(ActivatedRoute)
   private readonly endpoint = "/products"
+  auth = inject(AuthService)
 
   constructor(private readonly route: ActivatedRoute) {
     super();
     route.data.subscribe(({produit}) => {
       if(produit) this.form.patchValue(produit)
       else this.form.reset(/*{name: "Name reset"}*/)
+    })
+    this.form.valueChanges.subscribe(changes => {
+      this.auth.hasChanges = true
     })
   }
 
@@ -57,7 +62,10 @@ export class EditorComponent extends AbstractFormGroupComponent {
 
   onSubmit$() {
       this.http[this.isUpdate ? 'put' : 'post'](this.url,this.form.value)
-        .subscribe(() => this.router.navigate(["../"], {relativeTo: this.route}))
+        .subscribe(() => {
+          this.auth.hasChanges = false
+          this.router.navigate(["../"], {relativeTo: this.route})
+        })
   }
 
 

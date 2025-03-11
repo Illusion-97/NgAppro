@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Router} from '@angular/router';
 import {AbstractFormGroupComponent} from '../../../common/tools/abstract-form-group-component';
 import {AuthService} from '../../auth.service';
@@ -7,7 +7,7 @@ import {AuthService} from '../../auth.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -18,8 +18,8 @@ export class LoginComponent extends AbstractFormGroupComponent {
   })
 
 
-  private service : AuthService = inject(AuthService)
-  private router: Router = inject(Router)
+  protected readonly service : AuthService = inject(AuthService)
+  private readonly router: Router = inject(Router)
 
   onSubmit$(): void {
     this.service.login(this.form.value).subscribe(() => this.router.navigate(['/']))

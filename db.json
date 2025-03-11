@@ -1,5 +1,12 @@
 {
-  "users": [],
+  "users": [
+    {
+      "email": "yadekalom@gmail.com",
+      "password": "$2a$10$qldDR.oTA5BNHw9w3/ZL6uSghy.PynT60tp2QkEpfgx.GC9zrSdWO",
+      "id": 1,
+      "username": "Yanis"
+    }
+  ],
   "products": [
     {
       "id": 1,

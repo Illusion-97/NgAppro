@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import {RouterLink} from '@angular/router';
+import {Component, inject} from '@angular/core';
+import {Router, RouterLink} from '@angular/router';
 import {WaiterComponent} from '../waiter/waiter.component';
+import {AuthService} from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -12,5 +13,11 @@ import {WaiterComponent} from '../waiter/waiter.component';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  protected service = inject(AuthService)
 
+  hiddenDropdown: boolean = true
+
+  constructor(protected router: Router) {
+    router.events.subscribe(() => this.hiddenDropdown = true)
+  }
 }
