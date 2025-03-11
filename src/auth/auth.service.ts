@@ -18,7 +18,6 @@ export class AuthService {
 
   register(data: User) {
     return this.http.post<AuthResponse>("/register", data)
-
   }
 }
 
