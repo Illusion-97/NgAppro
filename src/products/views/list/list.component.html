@@ -38,6 +38,7 @@
         </td>
         <td class="px-6 py-4">
           <a routerLink="{{product.id}}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+          <button (click)="delete(product.id)" class="font-medium text-red-600 dark:text-red-500 hover:underline">Supprimer</button>
         </td>
       </tr>
         }
