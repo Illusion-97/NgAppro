@@ -2,11 +2,15 @@ import {Component, inject} from '@angular/core';
 import {map, Observable} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
+import {StepperComponent} from '../../../common/components/stepper/stepper.component';
+import {StepComponent} from '../../../common/components/stepper/step/step.component';
 
 @Component({
   selector: 'app-home',
   imports: [
-    AsyncPipe
+    AsyncPipe,
+    StepperComponent,
+    StepComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
