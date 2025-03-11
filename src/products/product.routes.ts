@@ -1,6 +1,7 @@
-import {Routes} from '@angular/router';
+import {ActivatedRoute, Routes} from '@angular/router';
 import {inject} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {productResolver} from './views/editor/editor.component';
 
 export const routes: Routes = [
   {
@@ -14,6 +15,12 @@ export const routes: Routes = [
   {
     path: ":id",
     loadComponent: () => import("./views/editor/editor.component")
-      .then(m => m.EditorComponent)
+      .then(m => m.EditorComponent),
+    resolve: {
+      produit: productResolver
+    }/*,
+    data: {
+      fixedProduct: undefined
+    }*/
   }
 ]

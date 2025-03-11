@@ -2,9 +2,10 @@ import {Component, inject} from '@angular/core';
 import {FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {JsonPipe} from '@angular/common';
 import {HttpClient} from '@angular/common/http';
-import {ActivatedRoute, Router} from '@angular/router';
-import {catchError} from 'rxjs';
+import {ActivatedRoute, ActivatedRouteSnapshot, RedirectCommand, ResolveFn, Router} from '@angular/router';
+import {catchError, map, of, race, timeout} from 'rxjs';
 import {AbstractFormGroupComponent} from '../../../common/tools/abstract-form-group-component';
+import {Produit} from '../../../app/views/home/home.component';
 
 @Component({
   selector: 'app-editor',
@@ -34,8 +35,16 @@ export class EditorComponent extends AbstractFormGroupComponent {
 
   private http = inject(HttpClient)
   private router = inject(Router)
-  private route = inject(ActivatedRoute)
+  //private route = inject(ActivatedRoute)
   private readonly endpoint = "/products"
+
+  constructor(private readonly route: ActivatedRoute) {
+    super();
+    route.data.subscribe(({produit}) => {
+      if(produit) this.form.patchValue(produit)
+      else this.form.reset(/*{name: "Name reset"}*/)
+    })
+  }
 
   get isUpdate() {
     return !!this.form.value.id
@@ -67,4 +76,17 @@ export interface ProduitForm {
   src: FormControl<string>
   rating: FormControl<number>
   price: FormControl<number>
+}
+
+export const productResolver: ResolveFn<Produit | undefined> = (route, state) => {
+  // const id = Number(route.params['id'])
+  const id = Number(route.paramMap.get('id'))
+  const router = inject(Router)
+  return id
+    ? inject(HttpClient).get<Produit>("/products/"+id)
+      .pipe(catchError(err=> {
+        console.log("gestion personnalisée", err)
+        return of(new RedirectCommand(router.parseUrl("/products/0")))
+      }))
+    : undefined
 }
