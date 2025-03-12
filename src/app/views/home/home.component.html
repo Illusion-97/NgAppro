@@ -1,5 +1,5 @@
 <div class="h-full w-full">
-  <app-stepper [interval]="2000" random>
+  <app-stepper #stepper>
     @for (product of products | async; track product.id) {
       <app-step>
         <div class="w-full h-full flex justify-center items-center">
@@ -45,4 +45,5 @@
       </app-step>
     }
   </app-stepper>
+  <app-stepper-controls [stepper]="stepper"></app-stepper-controls>
 </div>

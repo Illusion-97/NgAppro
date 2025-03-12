@@ -4,13 +4,16 @@ import {AsyncPipe} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 import {StepperComponent} from '../../../common/components/stepper/stepper.component';
 import {StepComponent} from '../../../common/components/stepper/step/step.component';
+import {NextStepDirective} from '../../../common/components/stepper/next-step.directive';
+import {StepperControlsComponent} from './stepper-controls/stepper-controls.component';
 
 @Component({
   selector: 'app-home',
   imports: [
     AsyncPipe,
     StepperComponent,
-    StepComponent
+    StepComponent,
+    StepperControlsComponent
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

@@ -10,7 +10,7 @@ import {AuthService} from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-editor',
-  imports: [ReactiveFormsModule, JsonPipe],
+  imports: [ReactiveFormsModule],
   templateUrl: './editor.component.html',
   styleUrl: './editor.component.css'
 })

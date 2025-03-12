@@ -17,7 +17,7 @@ import {StepComponent} from './step/step.component';
   styleUrl: './stepper.component.css'
 })
 export class StepperComponent implements AfterViewInit, AfterContentInit {
-  @Input()
+  @Input({transform: (value: string) => Number(value)})
   interval?: number
   @Input({transform: () => true})
   random: boolean = false
@@ -82,6 +82,8 @@ export class StepperComponent implements AfterViewInit, AfterContentInit {
     })
 
     if(this.interval)
-      interval(this.interval).subscribe(() => this.random ? Math.ceil(Math.random() * this.last) : this.next())
+      interval(this.interval).subscribe(() => this.random
+        ? this.index = Math.ceil(Math.random() * this.last)
+        : this.next())
   }
 }
