@@ -5,6 +5,12 @@
       "password": "$2a$10$qldDR.oTA5BNHw9w3/ZL6uSghy.PynT60tp2QkEpfgx.GC9zrSdWO",
       "id": 1,
       "username": "Yanis"
+    },
+    {
+      "email": "yadekalom@jehann.fr",
+      "password": "$2a$10$QKm93w8v29O1OCWtFsuFWOiil7UwyqUWKuVtXyxfwjNht25u72jL6",
+      "id": 2,
+      "username": "Yanis"
     }
   ],
   "products": [

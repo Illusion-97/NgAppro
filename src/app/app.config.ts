@@ -15,6 +15,7 @@ const backEndInterceptor : HttpInterceptorFn = (req, next) => {
   }
   return next(req).pipe(catchError(err => {
     console.log("gestion globale")
+    console.log(req)
     return throwError(() => err)
   }))
 }
@@ -23,7 +24,6 @@ const tokenInterceptor : HttpInterceptorFn = (req, next) => {
   const auth = inject(AuthService)
   if(req.url.startsWith(environment.API_URL) && auth.token) {
     req = req.clone({
-      url: environment.API_URL + req.url,
       setHeaders: {
         Authorization: "Bearer " + auth.token
       }
