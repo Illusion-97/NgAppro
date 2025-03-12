@@ -3,18 +3,18 @@
     <div class="z-[9997] h-full w-full flex justify-center items-center relative p-10">
       <div (click)="service.close()" class="z-[9998] h-full w-full absolute bg-black/75"></div>
       @if (service.modal.value; as ref) {
-        <div class="z-[9999] max-w-full bg-white dark:bg-slate-800 flex flex-col">
-          <div>
+        <div class="z-[9999] max-w-full max-h-full bg-white dark:bg-slate-800 flex flex-col p-3 rounded-xl shadow-2xl">
+          <div class="p-3 overflow-auto">
             <ng-container *ngComponentOutlet="ref.component; inputs: ref.inputs"/>
           </div>
           <div class="flex justify-end flex-wrap gap-5 px-5">
-            <button #s [style.min-width.px]="c.offsetWidth"
-                    class="bg-red-500 text-white py-2 px-3 grow rounded-md"
-                    (click)="service.close(true)"> Cancel
+            <button
+                    class="bg-blue-500 text-white py-2 px-3 grow rounded-md"
+                    (click)="service.close(true)"> Sumbit
             </button>
-            <button #c [style.min-width.px]="s.offsetWidth"
-                    class="bg-gray-500 text-white py-2 px-3 grow rounded-md"
-                    (click)="service.close(false)"> Submit
+            <button
+                    class="bg-red-500 text-white py-2 px-3 grow rounded-md"
+                    (click)="service.close(false)"> Cancel
             </button>
           </div>
         </div>

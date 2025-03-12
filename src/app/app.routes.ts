@@ -2,6 +2,9 @@ import { Routes } from '@angular/router';
 import {inject} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {authGuard, AuthService} from '../auth/auth.service';
+import {Observable, Subject} from 'rxjs';
+import {ModalService} from '../common/services/modal.service';
+import {ExitConfirmComponent} from '../common/components/exit-confirm/exit-confirm.component';
 
 export const routes: Routes = [
   {
@@ -25,9 +28,17 @@ export const routes: Routes = [
     canMatch: [authGuard],
     canDeactivate: [
       () => {
-        if(inject(AuthService).hasChanges)
-          alert("Sure ?")
-        return true
+        const response = new Subject<boolean>()
+        inject(ModalService).open({
+          component: ExitConfirmComponent,
+          inputs: {},
+          onClose: (closeFn, submitted) => {
+            response.next(submitted)
+            closeFn()
+          }
+        })
+
+        return response
       }
     ]
   },
