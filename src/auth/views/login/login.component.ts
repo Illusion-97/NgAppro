@@ -2,7 +2,7 @@ import {Component, inject, Input} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Router} from '@angular/router';
 import {AbstractFormGroupComponent} from '../../../common/tools/abstract-form-group-component';
-import {AuthService} from '../../auth.service';
+import {AuthService} from 'my-auth';
 import {ModalService} from '../../../common/services/modal.service';
 
 @Component({

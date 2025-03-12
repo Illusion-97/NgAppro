@@ -8,6 +8,19 @@ describe('AppComponent', () => {
     }).compileComponents();
   });
 
+  it('should do something', () => {
+    // Preparation (Arrange)
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    const expected = "A Name"
+
+    // Execution (Act)
+    const result = app.doSomething()
+
+    // Vérification (Assert)
+    expect(result).toBe(expected)
+  })
+
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
